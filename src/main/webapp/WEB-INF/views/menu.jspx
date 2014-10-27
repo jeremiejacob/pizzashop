@@ -19,5 +19,8 @@
             <menu:item id="i_pizza_new" messageCode="global_menu_new" url="/pizzas?form" z="FJyKGGTINgIyGIqDihlwLSFEytE="/>
             <menu:item id="i_pizza_list" messageCode="global_menu_list" url="/pizzas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="xeipeDE0x1I+04qwdIrWrLg/6lc="/>
         </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__customerindex_id" messageCode="global_generic" url="/customer/index" z="rH6jdu6xvDwc+P2rI4aFGyHVxSM="/>
+        </menu:category>
     </menu:menu>
 </div>
