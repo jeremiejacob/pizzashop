@@ -6,12 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springsource.roo.pizzashop.domain.Base;
 
-@RequestMapping("/base/**")
+@RequestMapping("/bases/**")
 @Controller
 public class BaseController {
 	private static final Logger LOGGER = Logger.getLogger(BaseController.class);
@@ -36,13 +37,19 @@ public class BaseController {
 		} else {
 			base.merge();
 		}
-		return "redirect:/base/list";
+		return "redirect:/bases/list";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "list")
 	public String list(Model model) {
 		model.addAttribute("bases", Base.findAllBases());
 		return "bases/list";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "show/{id}")
+	public String show(Model model, @PathVariable Long id) {
+		model.addAttribute("base", Base.findBase(id));
+		return "bases/show";
 	}
 }
 
