@@ -51,5 +51,14 @@ public class BaseController {
 		model.addAttribute("base", Base.findBase(id));
 		return "bases/show";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
+	public String update(Model model, @PathVariable Long id) {
+		Base base = Base.findBase(id);
+		if (base == null) {
+			return "bases/list";
+		}
+		return populateEditForm(model, base, null);
+	}
 }
 
