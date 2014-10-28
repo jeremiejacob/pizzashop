@@ -53,4 +53,10 @@ public class CustomerController {
     	model.addAttribute("customers", Customer.findAllCustomers());
     	return "customer/list";
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "show/{id}")
+    public String show(Model model, @PathVariable("id") Long id) {
+    	model.addAttribute("customer", Customer.findCustomer(id));
+    	return "customer/show";
+    }
 }
