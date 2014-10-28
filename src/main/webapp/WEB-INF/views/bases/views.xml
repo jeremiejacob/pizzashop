@@ -4,13 +4,10 @@
     <definition extends="default" name="bases/list">
         <put-attribute name="body" value="/WEB-INF/views/bases/list.jspx"/>
     </definition>
-<definition extends="default" name="bases/show">
+    <definition extends="default" name="bases/show">
         <put-attribute name="body" value="/WEB-INF/views/bases/show.jspx"/>
     </definition>
-<definition extends="default" name="bases/create">
-        <put-attribute name="body" value="/WEB-INF/views/bases/create.jspx"/>
-    </definition>
-<definition extends="default" name="bases/update">
-        <put-attribute name="body" value="/WEB-INF/views/bases/update.jspx"/>
+    <definition extends="default" name="bases/edit">
+        <put-attribute name="body" value="/WEB-INF/views/bases/edit.jspx"/>
     </definition>
 </tiles-definitions>

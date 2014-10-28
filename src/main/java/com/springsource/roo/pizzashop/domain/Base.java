@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord
+@RooJpaActiveRecord(versionField = "")
 public class Base {
 
     /**

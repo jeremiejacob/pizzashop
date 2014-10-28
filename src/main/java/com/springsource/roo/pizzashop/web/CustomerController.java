@@ -1,7 +1,6 @@
 package com.springsource.roo.pizzashop.web;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +15,6 @@ import com.springsource.roo.pizzashop.domain.Customer;
 @Controller
 public class CustomerController {
 
-	private static final Logger LOGGER = Logger.getLogger(CustomerController.class);
-    
     @RequestMapping(method = RequestMethod.GET, value = "create")
     public String create(Model model) {
     	return populateEditForm(model, new Customer(), null);
@@ -33,9 +30,11 @@ public class CustomerController {
     	if (bindingResult.hasErrors()) {
     		return populateEditForm(model, customer, bindingResult);
     	}
-    	if(customer.getId() == null ) {
+    	if(customer.getId() == null) {
     		customer.persist();
-    	} 
+    	} else {
+    		customer.merge();
+    	}
     	return "redirect:/customer/list";
     }
     
@@ -61,7 +60,7 @@ public class CustomerController {
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
-    private String delete(Model model, @PathVariable Long id) {
+    public String delete(Model model, @PathVariable Long id) {
     	Customer customer = Customer.findCustomer(id);
     	if (customer != null) {
     		customer.remove();
