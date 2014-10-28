@@ -10,12 +10,13 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord
 public class Customer {
+
 	@NotNull
-	@Size(max = 30)
+	@Size(min = 1, max = 30)
 	private String firstName;
 	
 	@NotNull
-	@Size(max = 30)
+	@Size(min = 1, max = 30)
 	private String lastName;
 	
 	@Size(max = 50)
