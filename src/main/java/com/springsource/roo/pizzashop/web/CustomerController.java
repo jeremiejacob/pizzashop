@@ -60,7 +60,7 @@ public class CustomerController {
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
-    public String delete(Model model, @PathVariable Long id) {
+    public String delete(@PathVariable Long id) {
     	Customer customer = Customer.findCustomer(id);
     	if (customer != null) {
     		customer.remove();

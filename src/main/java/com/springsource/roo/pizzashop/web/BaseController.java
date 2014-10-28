@@ -60,5 +60,14 @@ public class BaseController {
 		}
 		return populateEditForm(model, base, null);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
+	public String delete(@PathVariable Long id) {
+		Base base = Base.findBase(id);
+		if (base != null) {
+			base.remove();
+		}
+		return "bases/list";
+	}
 }
 
