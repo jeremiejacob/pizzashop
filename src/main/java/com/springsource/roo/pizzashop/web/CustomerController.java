@@ -1,11 +1,9 @@
 package com.springsource.roo.pizzashop.web;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,14 +16,7 @@ import com.springsource.roo.pizzashop.domain.Customer;
 @Controller
 public class CustomerController {
 
-    @RequestMapping(method = RequestMethod.POST, value = "{id}")
-    public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
-    }
-
-    @RequestMapping
-    public String index() {
-        return "customer/index";
-    }
+	private static final Logger LOGGER = Logger.getLogger(CustomerController.class);
     
     @RequestMapping(method = RequestMethod.GET, value = "create")
     public String create(Model model) {
@@ -55,8 +46,26 @@ public class CustomerController {
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "show/{id}")
-    public String show(Model model, @PathVariable("id") Long id) {
+    public String show(Model model, @PathVariable Long id) {
     	model.addAttribute("customer", Customer.findCustomer(id));
     	return "customer/show";
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "update/{id}")
+    public String update(Model model, @PathVariable Long id) {
+    	Customer customer = Customer.findCustomer(id);
+    	if (customer == null) {
+    		return "redirect:/customer/list";
+    	}
+    	return populateEditForm(model, customer, null);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
+    private String delete(Model model, @PathVariable Long id) {
+    	Customer customer = Customer.findCustomer(id);
+    	if (customer != null) {
+    		customer.remove();
+    	}
+    	return "customer/list";
     }
 }
