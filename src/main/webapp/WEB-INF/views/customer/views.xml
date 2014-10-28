@@ -7,4 +7,7 @@
     <definition extends="default" name="customer/edit">
         <put-attribute name="body" value="/WEB-INF/views/customer/edit.jspx"/>
     </definition>
+       <definition extends="default" name="customer/list">
+        <put-attribute name="body" value="/WEB-INF/views/customer/list.jspx"/>
+    </definition>
 </tiles-definitions>

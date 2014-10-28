@@ -47,4 +47,10 @@ public class CustomerController {
     	} 
     	return "redirect:/customer/list";
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "list")
+    public String list(Model model) {
+    	model.addAttribute("customers", Customer.findAllCustomers());
+    	return "customer/list";
+    }
 }
