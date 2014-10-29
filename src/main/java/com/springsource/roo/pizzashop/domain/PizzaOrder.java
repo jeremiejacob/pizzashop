@@ -35,9 +35,7 @@ public class PizzaOrder {
 
     /**
      */
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date deliveryDate;
+    private String deliveryDate;
 
     /**
      */

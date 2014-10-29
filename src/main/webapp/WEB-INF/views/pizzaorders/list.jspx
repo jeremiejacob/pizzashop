@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_springsource_roo_pizzashop_domain_PizzaOrder" items="${pizzaorders}" z="HiqmrPMhIzfyd3JvA1mtUJDWsDQ=">
-        <table:table data="${pizzaorders}" id="l_com_springsource_roo_pizzashop_domain_PizzaOrder" path="/pizzaorders" z="orzqA4IaqkhN19z63DQ8ObtkIzQ=">
-            <table:column id="c_com_springsource_roo_pizzashop_domain_PizzaOrder_name" property="name" z="Qm50zRuBJEd3ehgBfZ44OQZYnRE="/>
-            <table:column id="c_com_springsource_roo_pizzashop_domain_PizzaOrder_address" property="address" z="8++o1pOMy335p6bsDSSthrGcEIM="/>
-            <table:column id="c_com_springsource_roo_pizzashop_domain_PizzaOrder_total" property="total" z="Z4twC+m/kNAgb2UJqsd/8M13cUM="/>
-            <table:column date="true" dateTimePattern="${pizzaOrder_deliverydate_date_format}" id="c_com_springsource_roo_pizzashop_domain_PizzaOrder_deliveryDate" property="deliveryDate" z="OvmuxwZGHrzZKFYNJ2BDKAizoK8="/>
-            <table:column id="c_com_springsource_roo_pizzashop_domain_PizzaOrder_pizzas" property="pizzas" z="qk/+HqwXvj6m9IwDQr5rDa39LL4="/>
-        </table:table>
-    </page:list>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:spring="http://www.springframework.org/tags"
+    xmlns:c="http://java.sun.com/jstl/core_rt" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />
+    <jsp:output omit-xml-declaration="yes" />
+
+    <h1>
+        <spring:message code="list.pizzaorder" />
+    </h1>
+    <table>
+        <thead>
+            <tr>
+                <th><spring:message code="common.id" /></th>
+                <th><spring:message code="common.name" /></th>
+                <th><spring:message code="common.address" /></th>
+                <th><spring:message code="common.total" /></th>
+                <th><spring:message code="common.deliverydate" /></th>
+                <th><spring:message code="common.pizzas" /></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${pizzaorders}" var="pizzaorder">
+                <tr>
+                    <td><c:out value="${pizzaorder.id}" /></td>
+                    <td><c:out value="${pizzaorder.name}" /></td>
+                    <td><c:out value="${pizzaorder.address}" /></td>
+                    <td><c:out value="${pizzaorder.total}" /></td>
+                    <td><c:out value="${pizzaorder.deliveryDate}" /></td>
+                    <td>
+                        <c:forEach items="${pizzaorder.pizzas}" var="pizza">
+                            <c:out value="${pizza.name}" />
+                        </c:forEach>
+                    </td>
+                    <td>
+                        <button class="btn btn-info"
+                            onclick="location.href='show/${pizzaorder.id}';" type="button">
+                            <spring:message code="common.show" htmlEscape="false" />
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info"
+                            onclick="location.href='update/${pizzaorder.id}';" type="button">
+                            <spring:message code="common.update" htmlEscape="false" />
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info"
+                            onclick="location.href='delete/${pizzaorder.id}';" type="button">
+                            <spring:message code="common.delete" htmlEscape="false" />
+                        </button>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </div>
