@@ -58,4 +58,13 @@ public class PizzaController {
 		model.addAttribute("pizza", Pizza.findPizza(id));
 		return "pizzas/show";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
+	public String delete(@PathVariable Long id) {
+		Pizza pizza = Pizza.findPizza(id);
+		if (pizza != null) {
+			pizza.remove();
+		}
+		return "pizzas/list";
+	}
 }
