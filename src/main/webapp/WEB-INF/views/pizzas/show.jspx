@@ -5,7 +5,7 @@
     <page:show id="ps_com_springsource_roo_pizzashop_domain_Pizza" object="${pizza}" path="/pizzas" z="a5PqMdSb5T64R11vt5M3eI316kk=">
         <field:display field="name" id="s_com_springsource_roo_pizzashop_domain_Pizza_name" object="${pizza}" z="Bjg5fiRicAlI5BDjThysh5KEoUs="/>
         <field:display field="price" id="s_com_springsource_roo_pizzashop_domain_Pizza_price" object="${pizza}" z="d/9EfK4PGhCREAYJnF7kVjN6/iQ="/>
-        <field:display field="toppings" id="s_com_springsource_roo_pizzashop_domain_Pizza_toppings" object="${pizza}" z="1nMZS8hMH7RJQq3/E92JMUMxrAU="/>
         <field:display field="base" id="s_com_springsource_roo_pizzashop_domain_Pizza_base" object="${pizza}" z="KM6KGsaDvyiPlXgy1obOx2/zvKc="/>
+        <field:display field="topping" id="s_com_springsource_roo_pizzashop_domain_Pizza_topping" object="${pizza}" z="iT67vlg0K9uaZt4G0CWZupJdDjo="/>
     </page:show>
 </div>

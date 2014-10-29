@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<h1>
+		<c:if test="${form.id == null}">
+			<spring:message code="create.pizza" />
+		</c:if>
+		<c:if test="${form.id != null}">
+			<spring:message code="update.pizza" />
+		</c:if>
+	</h1>
+	<form:form action="save" method="POST" modelAttribute="form">
+		<form:hidden path="id" />
+		<table>
+			<thead></thead>
+			<tbody>
+				<tr>
+					<td><spring:message code="common.name" /></td>
+					<td><form:input path="name" />
+						<div>
+							<form:errors path="name" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><spring:message code="common.price" /></td>
+					<td><form:input path="price" />
+						<div>
+							<form:errors path="price" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><spring:message code="common.toppings" /></td>
+					<td>
+					     <form:checkboxes path="toppings" items="${toppings}" itemLabel="name" itemValue="id"/>
+					</td>
+					<div><form:errors path="toppings" /></div>
+				</tr>
+				<tr>
+					<td><spring:message code="common.bases" /></td>
+					<td><form:select path="base" items="${bases}" itemLabel="name" itemValue="id"/></td>
+					<div><form:errors path="base" /></div>
+				</tr>
+			</tbody>
+		</table>
+		<button type="submit">
+			<c:if test="${form.id == null}">
+				<spring:message code="common.create" />
+			</c:if>
+			<c:if test="${form.id != null}">
+				<spring:message code="common.update" />
+			</c:if>
+		</button>
+	</form:form>
+</div>

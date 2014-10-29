@@ -1,11 +1,54 @@
 package com.springsource.roo.pizzashop.web;
-import com.springsource.roo.pizzashop.domain.Pizza;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import javax.validation.Valid;
 
-@RequestMapping("/pizzas")
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.springsource.roo.pizzashop.domain.Base;
+import com.springsource.roo.pizzashop.domain.Pizza;
+import com.springsource.roo.pizzashop.domain.Topping;
+
+@RequestMapping("/pizzas/**")
 @Controller
-@RooWebScaffold(path = "pizzas", formBackingObject = Pizza.class)
 public class PizzaController {
+	private static final Logger LOGGER = Logger.getLogger(PizzaController.class);
+	
+	@RequestMapping(method = RequestMethod.GET, value = "create")
+	public String create(Model model) {
+		return populateEditForm(model, new Pizza(), null);
+	}
+	
+	private String populateEditForm(Model model, Pizza pizza, BindingResult bindingResult) {
+		model.addAttribute("form", pizza);
+		model.addAttribute("toppings", Topping.findAllToppings());
+		model.addAttribute("bases", Base.findAllBases());
+		return "pizzas/edit";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "save")
+	private String save(Model model, @Valid @ModelAttribute("form") Pizza pizza, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			LOGGER.info("hit");
+			return populateEditForm(model, pizza, bindingResult);
+		}
+		if(pizza.getId() == null) {
+			pizza.persist();
+		} else {
+			pizza.merge();
+		}
+		return "redirect:/pizzas/list";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "list")
+	public String list(Model model) {
+		model.addAttribute("pizzas", Pizza.findAllPizzas());
+		model.addAttribute("toppings", Topping.findAllToppings());
+		model.addAttribute("bases", Base.findAllBases());
+		return "pizzas/list";
+	}
 }

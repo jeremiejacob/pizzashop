@@ -28,7 +28,7 @@ public class Pizza {
     /**
      */
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Topping> toppings = new HashSet<Topping>();
+    private Set<Topping> toppings;
 
     /**
      */
