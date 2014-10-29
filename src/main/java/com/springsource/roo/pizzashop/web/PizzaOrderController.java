@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -46,5 +47,11 @@ public class PizzaOrderController {
 			pizzaorder.merge();
 		}
 		return "redirect:/pizzaorders/list";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "show/{id}")
+	public String show(Model model, @PathVariable Long id) {
+		model.addAttribute("pizzaorder", PizzaOrder.findPizzaOrder(id));
+		return "pizzaorders/show";
 	}
 }

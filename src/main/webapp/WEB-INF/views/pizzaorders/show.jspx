@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_com_springsource_roo_pizzashop_domain_PizzaOrder" object="${pizzaorder}" path="/pizzaorders" z="SvNLtNpNUHZbB/5ySL/7Tso093g=">
-        <field:display field="name" id="s_com_springsource_roo_pizzashop_domain_PizzaOrder_name" object="${pizzaorder}" z="MTnBznYUXWmSp2f/hvwtjlFE4uQ="/>
-        <field:display field="address" id="s_com_springsource_roo_pizzashop_domain_PizzaOrder_address" object="${pizzaorder}" z="nTmcCzakDYryhGpYKBkr/29P5p0="/>
-        <field:display field="total" id="s_com_springsource_roo_pizzashop_domain_PizzaOrder_total" object="${pizzaorder}" z="YsJykrpdHqX3ncc01n1duwAMoK8="/>
-        <field:display date="true" dateTimePattern="${pizzaOrder_deliverydate_date_format}" field="deliveryDate" id="s_com_springsource_roo_pizzashop_domain_PizzaOrder_deliveryDate" object="${pizzaorder}" z="LQZkxOtLIsqjMKDPhoSlyD0gVPw="/>
-        <field:display field="pizzas" id="s_com_springsource_roo_pizzashop_domain_PizzaOrder_pizzas" object="${pizzaorder}" z="WrAEMLiNjKdxa2hcQuqASNae0Lc="/>
-    </page:show>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:spring="http://www.springframework.org/tags"
+    xmlns:c="http://java.sun.com/jstl/core_rt" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />
+    <jsp:output omit-xml-declaration="yes" />
+    <h1>
+        <spring:message code="show.pizzaorder" />
+    </h1>
+    <table>
+        <thead></thead>
+        <tbody>
+            <tr>
+                <td><spring:message code="common.name" /></td>
+                <td><c:out value="${pizzaorder.name }" /></td>
+            </tr>
+            <tr>
+                <td><spring:message code="common.address" /></td>
+                <td><c:out value="${pizzaorder.address}" /></td>
+            </tr>
+            <tr>
+                <td><spring:message code="common.total" /></td>
+                <td><c:out value="${pizzaorder.total}" /></td>
+            </tr>
+            <tr>
+                 <td><spring:message code="common.deliverydate" /></td>
+                 <td><c:out value="${pizzaorder.deliveryDate}" /></td>
+            </tr>
+            <tr>          
+                <td><spring:message code="common.pizzas" /></td>
+                <td>
+                    <c:forEach items="${pizzaorder.pizzas}" var="pizza">
+                        <div>
+                          <c:out value="${pizza.name}" />
+                        </div>
+                    </c:forEach>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
