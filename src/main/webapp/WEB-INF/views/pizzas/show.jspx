@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_com_springsource_roo_pizzashop_domain_Pizza" object="${pizza}" path="/pizzas" z="a5PqMdSb5T64R11vt5M3eI316kk=">
-        <field:display field="name" id="s_com_springsource_roo_pizzashop_domain_Pizza_name" object="${pizza}" z="Bjg5fiRicAlI5BDjThysh5KEoUs="/>
-        <field:display field="price" id="s_com_springsource_roo_pizzashop_domain_Pizza_price" object="${pizza}" z="d/9EfK4PGhCREAYJnF7kVjN6/iQ="/>
-        <field:display field="base" id="s_com_springsource_roo_pizzashop_domain_Pizza_base" object="${pizza}" z="KM6KGsaDvyiPlXgy1obOx2/zvKc="/>
-        <field:display field="topping" id="s_com_springsource_roo_pizzashop_domain_Pizza_topping" object="${pizza}" z="iT67vlg0K9uaZt4G0CWZupJdDjo="/>
-    </page:show>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:c="http://java.sun.com/jstl/core_rt" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<h1>
+		<spring:message code="show.pizza" />
+	</h1>
+	<table>
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td><spring:message code="common.name" /></td>
+				<td><c:out value="${pizza.name }" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code="common.price" /></td>
+				<td><c:out value="${pizza.price}" /></td>
+			</tr>
+			    <td><spring:message code="common.topping" /></td>
+				<td>
+					<c:forEach items="${pizza.toppings}" var="topping">
+						<div>
+						  <c:out value="${topping.name}" />
+						</div>
+					</c:forEach>
+				</td>
+			<tr>
+			     <td><spring:message code="common.base" /></td>
+			     <td><c:out value="${pizza.base.name}" /></td>
+			</tr>
+		</tbody>
+	</table>
 </div>

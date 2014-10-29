@@ -35,19 +35,19 @@
                     <td><c:out value="${pizza.base.name}" /></td>
                     <td>
                         <button class="btn btn-info"
-                            onclick="location.href='show/${base.id}';" type="button">
+                            onclick="location.href='show/${pizza.id}';" type="button">
                             <spring:message code="common.show" htmlEscape="false" />
                         </button>
                     </td>
                     <td>
                         <button class="btn btn-info"
-                            onclick="location.href='update/${base.id}';" type="button">
+                            onclick="location.href='update/${pizza.id}';" type="button">
                             <spring:message code="common.update" htmlEscape="false" />
                         </button>
                     </td>
                     <td>
                         <button class="btn btn-info"
-                            onclick="location.href='delete/${base.id}';" type="button">
+                            onclick="location.href='delete/${pizza.id}';" type="button">
                             <spring:message code="common.delete" htmlEscape="false" />
                         </button>
                     </td>
