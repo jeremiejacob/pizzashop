@@ -54,4 +54,13 @@ public class PizzaOrderController {
 		model.addAttribute("pizzaorder", PizzaOrder.findPizzaOrder(id));
 		return "pizzaorders/show";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
+	public String delete(@PathVariable Long id) {
+		PizzaOrder pizzaorder = PizzaOrder.findPizzaOrder(id);
+		if(pizzaorder != null) {
+			pizzaorder.remove();
+		}
+		return "pizzaorders/list";
+	}
 }
