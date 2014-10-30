@@ -67,6 +67,6 @@ private static final Logger LOGGER = Logger.getLogger(BaseController.class);
 		if (topping != null) {
 			topping.remove();
 		}
-		return "toppings/list";
+		return "redirect:/toppings/list";
 	}
 }

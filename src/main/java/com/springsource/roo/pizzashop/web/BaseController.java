@@ -67,7 +67,7 @@ public class BaseController {
 		if (base != null) {
 			base.remove();
 		}
-		return "bases/list";
+		return "redirect:/bases/list";
 	}
 }
 

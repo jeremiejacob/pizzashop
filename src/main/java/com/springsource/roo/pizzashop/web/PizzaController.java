@@ -65,7 +65,7 @@ public class PizzaController {
 		if (pizza != null) {
 			pizza.remove();
 		}
-		return "pizzas/list";
+		return "redirect:/pizzas/list";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")

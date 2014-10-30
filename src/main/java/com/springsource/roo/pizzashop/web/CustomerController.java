@@ -65,6 +65,6 @@ public class CustomerController {
     	if (customer != null) {
     		customer.remove();
     	}
-    	return "customer/list";
+    	return "redirect:/customer/list";
     }
 }
