@@ -2,6 +2,7 @@ package com.springsource.roo.pizzashop.web;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springsource.roo.pizzashop.domain.Base;
+import com.springsource.roo.pizzashop.service.BaseService;
 
 @RequestMapping("/bases/**")
 @Controller
 public class BaseController {
 	private static final Logger LOGGER = Logger.getLogger(BaseController.class);
+	
+	@Autowired
+	private BaseService baseService;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "create")
 	public String create(Model model) {
@@ -33,28 +38,28 @@ public class BaseController {
 			return populateEditForm(model, base, bindingResult);
 		}
 		if(base.getId() == null) {
-			base.persist();
+			baseService.persist(base);
 		} else {
-			base.merge();
+			baseService.merge(base);
 		}
 		return "redirect:/bases/list";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "list")
 	public String list(Model model) {
-		model.addAttribute("bases", Base.findAllBases());
+		model.addAttribute("bases", baseService.findAllBases());
 		return "bases/list";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "show/{id}")
 	public String show(Model model, @PathVariable Integer id) {
-		model.addAttribute("base", Base.findBase(id));
+		model.addAttribute("base", baseService.findBase(id));
 		return "bases/show";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
 	public String update(Model model, @PathVariable Integer id) {
-		Base base = Base.findBase(id);
+		Base base = baseService.findBase(id);
 		if (base == null) {
 			return "bases/list";
 		}
@@ -63,9 +68,9 @@ public class BaseController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
 	public String delete(@PathVariable Integer id) {
-		Base base = Base.findBase(id);
+		Base base = baseService.findBase(id);
 		if (base != null) {
-			base.remove();
+			baseService.remove(base);
 		}
 		return "redirect:/bases/list";
 	}
