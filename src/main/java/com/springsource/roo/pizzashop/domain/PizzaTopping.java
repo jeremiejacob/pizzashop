@@ -11,7 +11,6 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord(versionField = "")
-@IdClass(PizzaToppingId.class)
 public class PizzaTopping {
 	
 	@Id
