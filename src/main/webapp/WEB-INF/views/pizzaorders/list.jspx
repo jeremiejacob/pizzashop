@@ -12,8 +12,7 @@
         <thead>
             <tr>
                 <th><spring:message code="common.id" /></th>
-                <th><spring:message code="common.name" /></th>
-                <th><spring:message code="common.address" /></th>
+                <th><spring:message code="common.customername" /></th>
                 <th><spring:message code="common.total" /></th>
                 <th><spring:message code="common.deliverydate" /></th>
                 <th><spring:message code="common.pizzas" /></th>
@@ -26,8 +25,10 @@
             <c:forEach items="${pizzaorders}" var="pizzaorder">
                 <tr>
                     <td><c:out value="${pizzaorder.id}" /></td>
-                    <td><c:out value="${pizzaorder.name}" /></td>
-                    <td><c:out value="${pizzaorder.address}" /></td>
+                    <td>
+                        <div><c:out value="${pizzaorder.customer.firstName}" /></div>
+                        <div><c:out value="${pizzaorder.customer.address}" /></div>
+                    </td>
                     <td><c:out value="${pizzaorder.total}" /></td>
                     <td><c:out value="${pizzaorder.deliveryDate}" /></td>
                     <td>

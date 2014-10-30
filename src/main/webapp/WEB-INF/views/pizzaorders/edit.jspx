@@ -20,19 +20,10 @@
             <thead></thead>
             <tbody>
                 <tr>
-                    <td><spring:message code="common.name" /></td>
-                    <td><form:input path="name" />
-                        <div>
-                            <form:errors path="name" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><spring:message code="common.address" /></td>
-                    <td><form:input path="address" />
-                        <div>
-                            <form:errors path="address" />
-                        </div>
+                    <td><spring:message code="common.customername" /></td>
+                    <td>
+                        <form:select path="customer" items="${customers}" itemLabel="firstName" itemValue="id" />
+                        <div><form:errors path="customer" /></div>
                     </td>
                 </tr>
                 <tr>

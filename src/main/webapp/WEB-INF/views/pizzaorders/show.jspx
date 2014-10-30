@@ -11,12 +11,8 @@
         <thead></thead>
         <tbody>
             <tr>
-                <td><spring:message code="common.name" /></td>
-                <td><c:out value="${pizzaorder.name }" /></td>
-            </tr>
-            <tr>
-                <td><spring:message code="common.address" /></td>
-                <td><c:out value="${pizzaorder.address}" /></td>
+                <td><spring:message code="common.customername" /></td>
+                <td><c:out value="${pizzaorder.customer.firstName}" /></td>
             </tr>
             <tr>
                 <td><spring:message code="common.total" /></td>

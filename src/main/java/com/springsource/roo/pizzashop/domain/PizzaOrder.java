@@ -50,5 +50,5 @@ public class PizzaOrder {
      */
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "pizza_order_pizza", joinColumns = @JoinColumn(name = "pizza_order_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
-    private Set<Pizza> pizzas = new HashSet<Pizza>();
+    private Set<Pizza> pizzas;
 }

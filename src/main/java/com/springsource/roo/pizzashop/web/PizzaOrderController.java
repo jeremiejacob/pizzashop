@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.springsource.roo.pizzashop.domain.Customer;
 import com.springsource.roo.pizzashop.domain.Pizza;
 import com.springsource.roo.pizzashop.domain.PizzaOrder;
 
@@ -21,6 +22,7 @@ public class PizzaOrderController {
 	@RequestMapping(method = RequestMethod.GET, value = "list")
 	public String list(Model model) {
 		model.addAttribute("pizzaorders", PizzaOrder.findAllPizzaOrders());
+		LOGGER.info(PizzaOrder.findAllPizzaOrders());
 		return "pizzaorders/list";
 	}
 	
@@ -31,6 +33,7 @@ public class PizzaOrderController {
 	
 	private String populateEditForm(Model model, PizzaOrder pizzaorder, BindingResult bindingResult){
 		model.addAttribute("form", pizzaorder);
+		model.addAttribute("customers", Customer.findAllCustomers());
 		model.addAttribute("pizzas", Pizza.findAllPizzas());
 		return "pizzaorders/edit";
 	}
@@ -62,5 +65,14 @@ public class PizzaOrderController {
 			pizzaorder.remove();
 		}
 		return "pizzaorders/list";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
+	public String update(Model model, @PathVariable Integer id) {
+		PizzaOrder pizzaorder = PizzaOrder.findPizzaOrder(id);
+		if(pizzaorder == null) {
+			return "pizzaorders/list";
+		}
+		return populateEditForm(model, pizzaorder, null);
 	}
 }

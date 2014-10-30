@@ -67,4 +67,13 @@ public class PizzaController {
 		}
 		return "pizzas/list";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
+	public String update(Model model, @PathVariable Integer id) {
+		Pizza pizza = Pizza.findPizza(id);
+		if(pizza == null) {
+			return "pizzas/list";
+		}
+		return populateEditForm(model, pizza, null);
+	}
 }
