@@ -1,28 +1,26 @@
 package com.springsource.roo.pizzashop.domain;
+
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.IdClass;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
+
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord(versionField = "")
-public class Base {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+@IdClass(PizzaOrderPizzaId.class)
+public class PizzaOrderPizza {
 	
-    /**
-     */
-    @NotNull
-    @Size(min = 2)
-    private String name;
+	@Id
+    @Column(name = "pizza_order_id")
+	private Integer pizzaOrderId;
+	
+	@Id
+    @Column(name = "pizza_id")
+	private Integer pizzaId;
+
 }

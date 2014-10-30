@@ -45,13 +45,13 @@ public class CustomerController {
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "show/{id}")
-    public String show(Model model, @PathVariable Long id) {
+    public String show(Model model, @PathVariable Integer id) {
     	model.addAttribute("customer", Customer.findCustomer(id));
     	return "customer/show";
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "update/{id}")
-    public String update(Model model, @PathVariable Long id) {
+    public String update(Model model, @PathVariable Integer id) {
     	Customer customer = Customer.findCustomer(id);
     	if (customer == null) {
     		return "redirect:/customer/list";
@@ -60,7 +60,7 @@ public class CustomerController {
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Integer id) {
     	Customer customer = Customer.findCustomer(id);
     	if (customer != null) {
     		customer.remove();

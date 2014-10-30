@@ -47,13 +47,13 @@ private static final Logger LOGGER = Logger.getLogger(BaseController.class);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "show/{id}")
-	public String show(Model model, @PathVariable Long id) {
+	public String show(Model model, @PathVariable Integer id) {
 		model.addAttribute("topping", Topping.findTopping(id));
 		return "toppings/show";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
-	public String update(Model model, @PathVariable Long id) {
+	public String update(Model model, @PathVariable Integer id) {
 		Topping topping = Topping.findTopping(id);
 		if (topping == null) {
 			return "toppings/list";
@@ -62,7 +62,7 @@ private static final Logger LOGGER = Logger.getLogger(BaseController.class);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
-	public String delete(@PathVariable Long id) {
+	public String delete(@PathVariable Integer id) {
 		Topping topping = Topping.findTopping(id);
 		if (topping != null) {
 			topping.remove();

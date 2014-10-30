@@ -47,13 +47,13 @@ public class BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "show/{id}")
-	public String show(Model model, @PathVariable Long id) {
+	public String show(Model model, @PathVariable Integer id) {
 		model.addAttribute("base", Base.findBase(id));
 		return "bases/show";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
-	public String update(Model model, @PathVariable Long id) {
+	public String update(Model model, @PathVariable Integer id) {
 		Base base = Base.findBase(id);
 		if (base == null) {
 			return "bases/list";
@@ -62,7 +62,7 @@ public class BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
-	public String delete(@PathVariable Long id) {
+	public String delete(@PathVariable Integer id) {
 		Base base = Base.findBase(id);
 		if (base != null) {
 			base.remove();

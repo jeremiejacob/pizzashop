@@ -54,13 +54,13 @@ public class PizzaController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "show/{id}")
-	public String show(Model model, @PathVariable Long id) {
+	public String show(Model model, @PathVariable Integer id) {
 		model.addAttribute("pizza", Pizza.findPizza(id));
 		return "pizzas/show";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
-	public String delete(@PathVariable Long id) {
+	public String delete(@PathVariable Integer id) {
 		Pizza pizza = Pizza.findPizza(id);
 		if (pizza != null) {
 			pizza.remove();
