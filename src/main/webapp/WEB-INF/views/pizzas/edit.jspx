@@ -38,14 +38,14 @@
 				<tr>
 					<td><spring:message code="common.toppings" /></td>
 					<td>
-					     <form:checkboxes path="toppings" items="${toppings}" itemLabel="name" itemValue="id"/>
+					     <form:checkboxes path="toppingIds" items="${toppings}" itemLabel="name" itemValue="id" element="div" />
 					</td>
-					<div><form:errors path="toppings" /></div>
+					<div><form:errors path="toppingIds" /></div>
 				</tr>
 				<tr>
 					<td><spring:message code="common.bases" /></td>
-					<td><form:select path="base" items="${bases}" itemLabel="name" itemValue="id"/></td>
-					<div><form:errors path="base" /></div>
+					<td><form:select path="baseId" items="${bases}" itemLabel="name" itemValue="id"/></td>
+					<div><form:errors path="baseId" /></div>
 				</tr>
 			</tbody>
 		</table>

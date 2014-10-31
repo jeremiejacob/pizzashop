@@ -2,6 +2,7 @@ package com.springsource.roo.pizzashop.web;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springsource.roo.pizzashop.domain.Topping;
+import com.springsource.roo.pizzashop.service.ToppingService;
 
 @RequestMapping("/toppings/**")
 @Controller
 public class ToppingController {
 private static final Logger LOGGER = Logger.getLogger(BaseController.class);
+	
+	@Autowired
+	private ToppingService toppingService;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "create")
 	public String create(Model model) {
@@ -33,28 +38,28 @@ private static final Logger LOGGER = Logger.getLogger(BaseController.class);
 			return populateEditForm(model, topping, bindingResult);
 		}
 		if(topping.getId() == null) {
-			topping.persist();
+			toppingService.persist(topping);
 		} else {
-			topping.merge();
+			toppingService.merge(topping);
 		}
 		return "redirect:/toppings/list";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "list")
 	public String list(Model model) {
-		model.addAttribute("toppings", Topping.findAllToppings());
+		model.addAttribute("toppings", toppingService.findAllToppings());
 		return "toppings/list";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "show/{id}")
 	public String show(Model model, @PathVariable Integer id) {
-		model.addAttribute("topping", Topping.findTopping(id));
+		model.addAttribute("topping", toppingService.findTopping(id));
 		return "toppings/show";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
 	public String update(Model model, @PathVariable Integer id) {
-		Topping topping = Topping.findTopping(id);
+		Topping topping = toppingService.findTopping(id);
 		if (topping == null) {
 			return "toppings/list";
 		}
@@ -63,9 +68,9 @@ private static final Logger LOGGER = Logger.getLogger(BaseController.class);
 	
 	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
 	public String delete(@PathVariable Integer id) {
-		Topping topping = Topping.findTopping(id);
+		Topping topping = toppingService.findTopping(id);
 		if (topping != null) {
-			topping.remove();
+			toppingService.remove(topping);
 		}
 		return "redirect:/toppings/list";
 	}
