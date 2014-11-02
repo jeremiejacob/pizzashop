@@ -38,9 +38,9 @@
 				<tr>
 					<td><spring:message code="common.toppings" /></td>
 					<td>
-					     <form:checkboxes path="toppingIds" items="${toppings}" itemLabel="name" itemValue="id" element="div" />
+					     <form:checkboxes path="toppings" items="${toppings}" itemLabel="name" itemValue="id" element="div" />
 					</td>
-					<div><form:errors path="toppingIds" /></div>
+					<div><form:errors path="toppings" /></div>
 				</tr>
 				<tr>
 					<td><spring:message code="common.bases" /></td>

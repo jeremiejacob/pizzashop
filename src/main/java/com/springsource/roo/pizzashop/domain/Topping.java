@@ -1,4 +1,6 @@
 package com.springsource.roo.pizzashop.domain;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @Entity
 @Table(name = "topping")
-public class Topping {
+public class Topping implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,7 @@ public class Topping {
 	
     /**
      */
-    @NotNull
+	@NotNull
     @Size(min = 2)
     @Column(name = "name")
     private String name;

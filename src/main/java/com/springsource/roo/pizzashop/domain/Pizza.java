@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,8 +45,8 @@ public class Pizza {
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "pizza_topping", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "topping_id"))
+    @ManyToMany(targetEntity = Topping.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "pizza_topping", joinColumns = @JoinColumn(name = "pizza_id") , inverseJoinColumns = @JoinColumn(name = "topping_id"))
     private List<Topping> toppings;
 
     /**

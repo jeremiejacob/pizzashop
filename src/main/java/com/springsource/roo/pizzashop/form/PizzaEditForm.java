@@ -19,12 +19,15 @@ public class PizzaEditForm {
 	
 	private Integer id;
 	
+	
 	@NotNull
 	@Size(min = 2)
 	private String name;
 	
 	private Float price;
-	private List<Integer> toppingIds;
+
+	private List<Integer> toppings;
+	
 	private Integer baseId;
 	
 	public Pizza toEntity() {
@@ -32,27 +35,28 @@ public class PizzaEditForm {
 		pizza.setId(id);
 		pizza.setName(name);
 		pizza.setPrice(price);
-		List<Topping> toppings = new ArrayList<Topping>();
-		for (Integer toppingId : toppingIds) {
+		List<Topping> tops = new ArrayList<Topping>();
+		for (Integer topping : toppings) {
 			Topping ntopping = new Topping();
-			ntopping.setId(toppingId);
-			toppings.add(ntopping);
+			ntopping.setId(topping);
+			tops.add(ntopping);
 		}
-		pizza.setToppings(toppings);
+		pizza.setToppings(tops);
 		pizza.setBase(new Base(){{setId(baseId);}});
+		logger.info(pizza);
 		return pizza;
 	}
 	
 	public static PizzaEditForm fromEntity(Pizza pizza) {
-        List<Integer> toppingIds = new ArrayList<Integer>();
+        List<Integer> tops = new ArrayList<Integer>();
         for (Topping topping : pizza.getToppings()) {
-        	toppingIds.add(topping.getId());
+        	tops.add(topping.getId());
         }
         PizzaEditForm form = new PizzaEditForm();
         form.id = pizza.getId();
         form.name = pizza.getName();
         form.price = pizza.getPrice();
-        form.toppingIds = toppingIds;
+        form.toppings = tops;
         form.baseId = pizza.getBase().getId();
         return form;
     }

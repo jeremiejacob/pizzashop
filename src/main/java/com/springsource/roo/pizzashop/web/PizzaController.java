@@ -49,6 +49,7 @@ public class PizzaController {
 			LOGGER.info("hit");
 			return populateEditForm(model, form, bindingResult);
 		}
+		LOGGER.info(form);
 		if(form.getId() == null) {
 			pizzaService.persist(form.toEntity());
 		} else {
