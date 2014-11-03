@@ -1,10 +1,10 @@
 package com.springsource.roo.pizzashop.domain;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +49,7 @@ public class PizzaOrder {
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Pizza.class, fetch = FetchType.EAGER)
     @JoinTable(name = "pizza_order_pizza", joinColumns = @JoinColumn(name = "pizza_order_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
-    private Set<Pizza> pizzas;
+    private List<Pizza> pizzas;
 }

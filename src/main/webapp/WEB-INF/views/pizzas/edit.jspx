@@ -44,8 +44,8 @@
 				</tr>
 				<tr>
 					<td><spring:message code="common.bases" /></td>
-					<td><form:select path="baseId" items="${bases}" itemLabel="name" itemValue="id"/></td>
-					<div><form:errors path="baseId" /></div>
+					<td><form:select path="base" items="${bases}" itemLabel="name" itemValue="id"/></td>
+					<div><form:errors path="base" /></div>
 				</tr>
 			</tbody>
 		</table>

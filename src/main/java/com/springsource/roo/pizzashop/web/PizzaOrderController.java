@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springsource.roo.pizzashop.domain.PizzaOrder;
+import com.springsource.roo.pizzashop.form.PizzaEditForm;
+import com.springsource.roo.pizzashop.form.PizzaOrderEditForm;
 import com.springsource.roo.pizzashop.service.CustomerService;
 import com.springsource.roo.pizzashop.service.PizzaOrderService;
 import com.springsource.roo.pizzashop.service.PizzaService;
@@ -38,25 +40,25 @@ public class PizzaOrderController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "create")
 	public String create(Model model) {
-		return populateEditForm(model, new PizzaOrder(), null);
+		return populateEditForm(model, new PizzaOrderEditForm(), null);
 	}
 	
-	private String populateEditForm(Model model, PizzaOrder pizzaOrder, BindingResult bindingResult){
-		model.addAttribute("form", pizzaOrder);
+	private String populateEditForm(Model model, PizzaOrderEditForm form, BindingResult bindingResult){
+		model.addAttribute("form", form);
 		model.addAttribute("customers", customerService.findAllCustomers());
 		model.addAttribute("pizzas", pizzaService.findAllPizzas());
 		return "pizzaorders/edit";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "save")
-	public String save(Model model, @Valid @ModelAttribute("form") PizzaOrder pizzaOrder, BindingResult bindingResult) {
+	public String save(Model model, @Valid @ModelAttribute("form") PizzaOrderEditForm form, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return populateEditForm(model, pizzaOrder, bindingResult);
+			return populateEditForm(model, form, bindingResult);
 		}
-		if (pizzaOrder.getId() == null) {
-			pizzaOrderService.persist(pizzaOrder);
+		if (form.getId() == null) {
+			pizzaOrderService.persist(form.toEntity());
 		} else {
-			pizzaOrderService.merge(pizzaOrder);
+			pizzaOrderService.merge(form.toEntity());
 		}
 		return "redirect:/pizzaorders/list";
 	}
@@ -78,10 +80,10 @@ public class PizzaOrderController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
 	public String update(Model model, @PathVariable Integer id) {
-		PizzaOrder pizzaorder = pizzaOrderService.findPizzaOrder(id);
-		if(pizzaorder == null) {
+		PizzaOrder pizzaOrder = pizzaOrderService.findPizzaOrder(id);
+		if(pizzaOrder == null) {
 			return "pizzaorders/list";
 		}
-		return populateEditForm(model, pizzaorder, null);
+		return populateEditForm(model, PizzaOrderEditForm.fromEntity(pizzaOrder), null);
 	}
 }

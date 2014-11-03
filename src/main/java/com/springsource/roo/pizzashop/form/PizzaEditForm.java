@@ -19,7 +19,6 @@ public class PizzaEditForm {
 	
 	private Integer id;
 	
-	
 	@NotNull
 	@Size(min = 2)
 	private String name;
@@ -28,7 +27,7 @@ public class PizzaEditForm {
 
 	private List<Integer> toppings;
 	
-	private Integer baseId;
+	private Integer base;
 	
 	public Pizza toEntity() {
 		Pizza pizza = new Pizza();
@@ -42,7 +41,7 @@ public class PizzaEditForm {
 			tops.add(ntopping);
 		}
 		pizza.setToppings(tops);
-		pizza.setBase(new Base(){{setId(baseId);}});
+		pizza.setBase(new Base(){{setId(base);}});
 		logger.info(pizza);
 		return pizza;
 	}
@@ -57,7 +56,7 @@ public class PizzaEditForm {
         form.name = pizza.getName();
         form.price = pizza.getPrice();
         form.toppings = tops;
-        form.baseId = pizza.getBase().getId();
+        form.base = pizza.getBase().getId();
         return form;
     }
 }

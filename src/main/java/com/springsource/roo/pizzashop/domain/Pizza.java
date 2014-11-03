@@ -1,4 +1,5 @@
 package com.springsource.roo.pizzashop.domain;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class Pizza {
 
     /**
      */
-    @ManyToMany(targetEntity = Topping.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Topping.class, fetch = FetchType.LAZY)
     @JoinTable(name = "pizza_topping", joinColumns = @JoinColumn(name = "pizza_id") , inverseJoinColumns = @JoinColumn(name = "topping_id"))
     private List<Topping> toppings;
 
