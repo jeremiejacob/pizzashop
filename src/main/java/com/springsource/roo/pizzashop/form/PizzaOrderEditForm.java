@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -19,11 +21,17 @@ public class PizzaOrderEditForm {
 	private static final Logger logger = Logger.getLogger(PizzaOrderEditForm.class);
 	
 	private Integer id;
+	
+	@NotNull
 	private Integer customer;
+	
+	@NotNull
 	private Float total;
 	
 	@NotEmpty
 	private String deliveryDate;
+	
+	@NotNull
 	private List<Integer> pizzas;
 	
 	public PizzaOrder toEntity() {

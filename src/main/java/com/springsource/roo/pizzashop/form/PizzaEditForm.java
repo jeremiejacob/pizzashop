@@ -23,10 +23,13 @@ public class PizzaEditForm {
 	@Size(min = 2)
 	private String name;
 	
+	@NotNull
 	private Float price;
 
+	@NotNull
 	private List<Integer> toppings;
 	
+	@NotNull
 	private Integer base;
 	
 	public Pizza toEntity() {

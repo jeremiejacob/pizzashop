@@ -39,13 +39,15 @@
 					<td><spring:message code="common.toppings" /></td>
 					<td>
 					     <form:checkboxes path="toppings" items="${toppings}" itemLabel="name" itemValue="id" element="div" />
+					     <div><form:errors path="toppings" /></div>
 					</td>
-					<div><form:errors path="toppings" /></div>
 				</tr>
 				<tr>
 					<td><spring:message code="common.bases" /></td>
-					<td><form:select path="base" items="${bases}" itemLabel="name" itemValue="id"/></td>
-					<div><form:errors path="base" /></div>
+					<td>
+					     <form:select path="base" items="${bases}" itemLabel="name" itemValue="id"/>
+					     <div><form:errors path="base" /></div>
+					</td>
 				</tr>
 			</tbody>
 		</table>

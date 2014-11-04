@@ -46,8 +46,8 @@
                     <td><spring:message code="common.pizzas" /></td>
                     <td>
                          <form:checkboxes path="pizzas" items="${pizzas}" itemLabel="name" itemValue="id"/>
+                         <div><form:errors path="pizzas" /></div>
                     </td>
-                    <div><form:errors path="pizzas" /></div>
                 </tr>
             </tbody>
         </table>
