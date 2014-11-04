@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springsource.roo.pizzashop.domain.Base;
+import com.springsource.roo.pizzashop.form.BaseFilterForm;
 
 @Service
 public class BaseService {
@@ -21,8 +22,13 @@ public class BaseService {
 	}
 	
 	public Base findBase(Integer id) {
-		if (id == null) return null;
-		return entityManager.find(Base.class, id);
+		return entityManager.createQuery("SELECT c FROM Base c WHERE c.id = :id", Base.class).setParameter("id", id).getSingleResult();
+	}
+	
+	public List<Base> findAllBasesWithCondition(BaseFilterForm form) {
+		String query = "SELECT c FROM Base c WHERE UPPER(c.name) LIKE UPPER(:name)";
+		String value = form.getName() == null ? "" : form.getName();
+		return entityManager.createQuery(query, Base.class).setParameter("name", "%" + value + "%").getResultList();
 	}
 	
 	@Transactional

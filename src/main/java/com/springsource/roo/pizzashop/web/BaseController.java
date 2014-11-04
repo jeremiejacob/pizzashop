@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springsource.roo.pizzashop.domain.Base;
+import com.springsource.roo.pizzashop.form.BaseFilterForm;
 import com.springsource.roo.pizzashop.service.BaseService;
 
 @RequestMapping("/bases/**")
@@ -46,8 +47,8 @@ public class BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "list")
-	public String list(Model model) {
-		model.addAttribute("bases", baseService.findAllBases());
+	public String list(Model model, @ModelAttribute("form") BaseFilterForm form) {
+		model.addAttribute("bases", baseService.findAllBasesWithCondition(form));
 		return "bases/list";
 	}
 	
