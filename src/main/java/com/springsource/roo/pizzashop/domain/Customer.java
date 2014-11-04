@@ -33,6 +33,7 @@ public class Customer {
 	@Column(name = "last_name")
 	private String lastName;
 
+	@NotNull
 	@Size(max = 50)
 	@Column(name = "address")
 	private String address;

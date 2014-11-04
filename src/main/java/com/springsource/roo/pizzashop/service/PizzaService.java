@@ -38,4 +38,5 @@ public class PizzaService {
 	public void remove(Pizza pizza) {
 		entityManager.remove(pizza);
 	}
+	
 }

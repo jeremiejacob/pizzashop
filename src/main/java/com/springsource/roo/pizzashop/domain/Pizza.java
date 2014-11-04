@@ -1,9 +1,6 @@
 package com.springsource.roo.pizzashop.domain;
-import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,6 +39,7 @@ public class Pizza {
     /**
      */
     @Column(name = "price")
+    @NotNull
     private Float price;
 
     /**
