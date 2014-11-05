@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springsource.roo.pizzashop.domain.Pizza;
 import com.springsource.roo.pizzashop.form.PizzaEditForm;
+import com.springsource.roo.pizzashop.form.PizzaFilterForm;
 import com.springsource.roo.pizzashop.service.BaseService;
 import com.springsource.roo.pizzashop.service.PizzaService;
 import com.springsource.roo.pizzashop.service.ToppingService;
@@ -59,8 +60,8 @@ public class PizzaController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "list")
-	public String list(Model model) {
-		model.addAttribute("pizzas", pizzaService.findAllPizzas());
+	public String list(Model model, @ModelAttribute("form") PizzaFilterForm form) {
+		model.addAttribute("pizzas", pizzaService.findAllPizzasWithCondition(form));
 		model.addAttribute("toppings", toppingService.findAllToppings());
 		model.addAttribute("bases", baseService.findAllBases());
 		return "pizzas/list";

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page"
     xmlns:spring="http://www.springframework.org/tags"
+    xmlns:form="http://www.springframework.org/tags/form"
     xmlns:c="http://java.sun.com/jstl/core_rt" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8" />
     <jsp:output omit-xml-declaration="yes" />
@@ -8,6 +9,23 @@
     <h1>
         <spring:message code="list.pizza" />
     </h1>
+    <hr></hr>
+    <h2><spring:message code="filter.pizza"/></h2>
+    <form:form method="GET" action="list" modelAttribute="form">
+        <div>
+            <form:label path="name">Name</form:label>
+            <form:input path="name"/>
+        </div>
+        <div>
+            <form:label path="price">Price</form:label>
+            <form:input path="price" />
+        </div>
+        <div>
+            <button type="submit">Search</button>
+        </div>
+    </form:form>
+    <hr></hr>
+    <h2><spring:message code="common.result"/></h2>
     <table>
         <thead>
             <tr>
