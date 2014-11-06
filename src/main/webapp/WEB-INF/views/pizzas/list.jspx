@@ -21,6 +21,14 @@
             <form:input path="price" />
         </div>
         <div>
+            <form:label path="base">Base</form:label>
+            <form:select path="base" items="${bases}" itemLabel="name" itemValue="id"/>
+        </div>
+        <div>
+            <form:label path="toppings">Toppings</form:label>
+            <form:checkboxes path="toppings" items="${toppings}" itemLabel="name" itemValue="id" element="div"/>
+        </div>
+        <div>
             <button type="submit">Search</button>
         </div>
     </form:form>
