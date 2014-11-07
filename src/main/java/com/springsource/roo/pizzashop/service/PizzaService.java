@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.springsource.roo.pizzashop.domain.Base;
 import com.springsource.roo.pizzashop.domain.Pizza;
+import com.springsource.roo.pizzashop.domain.PizzaTopping;
 import com.springsource.roo.pizzashop.domain.Topping;
 import com.springsource.roo.pizzashop.form.PizzaFilterForm;
 import com.springsource.roo.pizzashop.web.PizzaController;
@@ -38,8 +39,8 @@ public class PizzaService {
 	public List<Pizza> findAllPizzasWithCondition(PizzaFilterForm form) {
 		Map<String, Object> paramValue = new HashMap<String, Object>();
 		List<String> params = new ArrayList<String>();
-		List<Topping> tops = new ArrayList<Topping>();
-		String rootQuery = "SELECT c FROM Pizza c ";
+		List<Integer> topping_id = new ArrayList<Integer>();
+		String rootQuery = "SELECT DISTINCT c FROM Pizza c ";
 		if (form.getName() != null ) {
 			params.add("UPPER(c.name) LIKE UPPER(:name)");
 			paramValue.put("name", "%" + form.getName() + "%");
@@ -48,24 +49,20 @@ public class PizzaService {
 			params.add("c.price=:price");
 			paramValue.put("price", form.getPrice());
 		}
-		
 		if (form.getBase() != null) {
 			params.add("c.base=:base");
 			Base nbase = new Base();
 			nbase.setId(form.getBase());
 			paramValue.put("base", nbase);
 		}
-//		select distinct pizza.id, pizza.name, pizza.price from pizza left join pizza_topping on pizza.id = pizza_topping.pizza_id where pizza_topping.topping_id in (1,4);
 		if (form.getToppings() != null) {
-			params.add("c.toppings IN :toppings");
-			for (int i=0; i < form.getToppings().size(); i++) {
-				Topping ntopping = new Topping();
-				ntopping.setId(form.getToppings().get(i));
-				tops.add(ntopping);
+			params.add("pt.id IN (:topping_id)");
+			for (int i = 0; i < form.getToppings().size(); i++) {
+				topping_id.add(form.getToppings().get(i));
 			}
-			paramValue.put("toppings", tops);
+			paramValue.put("topping_id", topping_id);
+			rootQuery = rootQuery + "INNER JOIN c.toppings pt ";
 		}
-		 
 		if(params.size() != 0) {
 			rootQuery = rootQuery + "WHERE ";
 			params.add(null);
@@ -82,11 +79,12 @@ public class PizzaService {
 		}
 		LOGGER.info("Final Query: " + rootQuery);
 		TypedQuery<Pizza> typedQuery = entityManager.createQuery(rootQuery, Pizza.class);
+		LOGGER.info("hit");
 		for (String key : paramValue.keySet()) {
 			typedQuery.setParameter(key, paramValue.get(key));
 			LOGGER.info("paramValue.get(key); " + key + " : " + paramValue.get(key));
 		}
-		
+		LOGGER.info("Query Result: " + typedQuery.getResultList());
 		return typedQuery.getResultList();
 	}
 	

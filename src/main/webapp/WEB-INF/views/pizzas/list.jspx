@@ -22,7 +22,10 @@
         </div>
         <div>
             <form:label path="base">Base</form:label>
-            <form:select path="base" items="${bases}" itemLabel="name" itemValue="id"/>
+            <form:select path="base">
+                <form:option value="">&#160;</form:option>
+                <form:options items="${bases}" itemValue="id" itemLabel="name" element="div"/>
+            </form:select>
         </div>
         <div>
             <form:label path="toppings">Toppings</form:label>
