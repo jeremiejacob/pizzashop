@@ -9,6 +9,9 @@
 	<h1>
         <spring:message code="list.base" />
     </h1>
+    <h3>
+        <c:if test="${message != null}"><spring:message code="${message}"/></c:if>
+    </h3>
 	<hr></hr>
 	<h2><spring:message code="filter.base"/></h2>
 	<form:form action="list" method="GET" modelAttribute="form">

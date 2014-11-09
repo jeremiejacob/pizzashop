@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springsource.roo.pizzashop.domain.Base;
 import com.springsource.roo.pizzashop.form.BaseFilterForm;
@@ -23,8 +24,7 @@ public class BaseController {
 	@Autowired
 	private BaseService baseService;
 	
-	@RequestMapping(method = RequestMethod.GET, value = "create")
-	public String create(Model model) {
+	@RequestMapping(method = RequestMethod.GET, value = "create") String create(Model model) {
 		return populateEditForm(model, new Base(), null);
 	}
 	
@@ -34,14 +34,16 @@ public class BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "save")
-	public String save(Model model, @Valid @ModelAttribute("form") Base base, BindingResult bindingResult) {
+	public String save(Model model, @Valid @ModelAttribute("form") Base base, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()) {
 			return populateEditForm(model, base, bindingResult);
 		}
 		if(base.getId() == null) {
 			baseService.persist(base);
+			redirectAttributes.addFlashAttribute("message", "common_added_successfully");
 		} else {
 			baseService.merge(base);
+			redirectAttributes.addFlashAttribute("message", "common_updated_successfully");
 		}
 		return "redirect:/bases/list";
 	}
@@ -59,7 +61,7 @@ public class BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "update/{id}")
-	public String update(Model model, @PathVariable Integer id) {
+	public String update(Model model, @PathVariable Integer id) { 
 		Base base = baseService.findBase(id);
 		if (base == null) {
 			return "bases/list";
@@ -68,10 +70,11 @@ public class BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "delete/{id}")
-	public String delete(@PathVariable Integer id) {
+	public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
 		Base base = baseService.findBase(id);
 		if (base != null) {
 			baseService.remove(base);
+			redirectAttributes.addFlashAttribute("messsage", "common_deleted_successfully");
 		}
 		return "redirect:/bases/list";
 	}
